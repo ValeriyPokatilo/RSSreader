@@ -9,21 +9,35 @@
 /* Begin PBXBuildFile section */
 		970A9BF325BB3E94007F48C8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970A9BF225BB3E94007F48C8 /* AppDelegate.swift */; };
 		970A9BF525BB3E94007F48C8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970A9BF425BB3E94007F48C8 /* SceneDelegate.swift */; };
-		970A9BF725BB3E94007F48C8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970A9BF625BB3E94007F48C8 /* ViewController.swift */; };
-		970A9BFA25BB3E94007F48C8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 970A9BF825BB3E94007F48C8 /* Main.storyboard */; };
+		970A9BF725BB3E94007F48C8 /* RSSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970A9BF625BB3E94007F48C8 /* RSSViewController.swift */; };
 		970A9BFC25BB3E9A007F48C8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 970A9BFB25BB3E9A007F48C8 /* Assets.xcassets */; };
 		970A9BFF25BB3E9A007F48C8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 970A9BFD25BB3E9A007F48C8 /* LaunchScreen.storyboard */; };
+		970A9C0E25BB44CD007F48C8 /* RSSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970A9C0D25BB44CD007F48C8 /* RSSView.swift */; };
+		970A9C1225BB4594007F48C8 /* Metrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970A9C1125BB4594007F48C8 /* Metrics.swift */; };
+		970A9C1525BB45B4007F48C8 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970A9C1425BB45B4007F48C8 /* Fonts.swift */; };
+		970A9C1825BB45DD007F48C8 /* AssetImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970A9C1725BB45DD007F48C8 /* AssetImages.swift */; };
+		970A9C1B25BB46CA007F48C8 /* RSSCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970A9C1A25BB46CA007F48C8 /* RSSCell.swift */; };
+		970A9C1F25BB4844007F48C8 /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970A9C1E25BB4844007F48C8 /* Text.swift */; };
+		970A9C2625BB50A0007F48C8 /* RSSViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970A9C2525BB50A0007F48C8 /* RSSViewPresenter.swift */; };
+		970A9C2A25BB5335007F48C8 /* RSSViewPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970A9C2925BB5335007F48C8 /* RSSViewPresenterProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		970A9BEF25BB3E94007F48C8 /* RSSreader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RSSreader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		970A9BF225BB3E94007F48C8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		970A9BF425BB3E94007F48C8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		970A9BF625BB3E94007F48C8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		970A9BF925BB3E94007F48C8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		970A9BF625BB3E94007F48C8 /* RSSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSViewController.swift; sourceTree = "<group>"; };
 		970A9BFB25BB3E9A007F48C8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		970A9BFE25BB3E9A007F48C8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		970A9C0025BB3E9A007F48C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		970A9C0D25BB44CD007F48C8 /* RSSView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSView.swift; sourceTree = "<group>"; };
+		970A9C1125BB4594007F48C8 /* Metrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metrics.swift; sourceTree = "<group>"; };
+		970A9C1425BB45B4007F48C8 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		970A9C1725BB45DD007F48C8 /* AssetImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetImages.swift; sourceTree = "<group>"; };
+		970A9C1A25BB46CA007F48C8 /* RSSCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSCell.swift; sourceTree = "<group>"; };
+		970A9C1E25BB4844007F48C8 /* Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Text.swift; sourceTree = "<group>"; };
+		970A9C2525BB50A0007F48C8 /* RSSViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSViewPresenter.swift; sourceTree = "<group>"; };
+		970A9C2925BB5335007F48C8 /* RSSViewPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSViewPresenterProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +70,54 @@
 		970A9BF125BB3E94007F48C8 /* RSSreader */ = {
 			isa = PBXGroup;
 			children = (
+				970A9C2225BB5062007F48C8 /* TableView */,
+				970A9C2325BB506E007F48C8 /* TableViewCell */,
+				970A9C1025BB4579007F48C8 /* Helpers */,
+				970A9C0925BB42BD007F48C8 /* Application */,
+			);
+			path = RSSreader;
+			sourceTree = "<group>";
+		};
+		970A9C0925BB42BD007F48C8 /* Application */ = {
+			isa = PBXGroup;
+			children = (
 				970A9BF225BB3E94007F48C8 /* AppDelegate.swift */,
 				970A9BF425BB3E94007F48C8 /* SceneDelegate.swift */,
-				970A9BF625BB3E94007F48C8 /* ViewController.swift */,
-				970A9BF825BB3E94007F48C8 /* Main.storyboard */,
 				970A9BFB25BB3E9A007F48C8 /* Assets.xcassets */,
 				970A9BFD25BB3E9A007F48C8 /* LaunchScreen.storyboard */,
 				970A9C0025BB3E9A007F48C8 /* Info.plist */,
 			);
-			path = RSSreader;
+			path = Application;
+			sourceTree = "<group>";
+		};
+		970A9C1025BB4579007F48C8 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				970A9C1125BB4594007F48C8 /* Metrics.swift */,
+				970A9C1425BB45B4007F48C8 /* Fonts.swift */,
+				970A9C1725BB45DD007F48C8 /* AssetImages.swift */,
+				970A9C1E25BB4844007F48C8 /* Text.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		970A9C2225BB5062007F48C8 /* TableView */ = {
+			isa = PBXGroup;
+			children = (
+				970A9BF625BB3E94007F48C8 /* RSSViewController.swift */,
+				970A9C0D25BB44CD007F48C8 /* RSSView.swift */,
+				970A9C2525BB50A0007F48C8 /* RSSViewPresenter.swift */,
+				970A9C2925BB5335007F48C8 /* RSSViewPresenterProtocol.swift */,
+			);
+			path = TableView;
+			sourceTree = "<group>";
+		};
+		970A9C2325BB506E007F48C8 /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				970A9C1A25BB46CA007F48C8 /* RSSCell.swift */,
+			);
+			path = TableViewCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -126,7 +179,6 @@
 			files = (
 				970A9BFF25BB3E9A007F48C8 /* LaunchScreen.storyboard in Resources */,
 				970A9BFC25BB3E9A007F48C8 /* Assets.xcassets in Resources */,
-				970A9BFA25BB3E94007F48C8 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,23 +189,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				970A9BF725BB3E94007F48C8 /* ViewController.swift in Sources */,
+				970A9C2625BB50A0007F48C8 /* RSSViewPresenter.swift in Sources */,
+				970A9C1B25BB46CA007F48C8 /* RSSCell.swift in Sources */,
+				970A9BF725BB3E94007F48C8 /* RSSViewController.swift in Sources */,
+				970A9C0E25BB44CD007F48C8 /* RSSView.swift in Sources */,
+				970A9C1225BB4594007F48C8 /* Metrics.swift in Sources */,
+				970A9C1F25BB4844007F48C8 /* Text.swift in Sources */,
 				970A9BF325BB3E94007F48C8 /* AppDelegate.swift in Sources */,
+				970A9C1825BB45DD007F48C8 /* AssetImages.swift in Sources */,
+				970A9C1525BB45B4007F48C8 /* Fonts.swift in Sources */,
 				970A9BF525BB3E94007F48C8 /* SceneDelegate.swift in Sources */,
+				970A9C2A25BB5335007F48C8 /* RSSViewPresenterProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		970A9BF825BB3E94007F48C8 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				970A9BF925BB3E94007F48C8 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		970A9BFD25BB3E9A007F48C8 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -287,7 +339,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = RSSreader/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/RSSreader/Application/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -295,7 +347,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = valeriy.pokatilo.RSSreader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -305,7 +357,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = RSSreader/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/RSSreader/Application/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -313,7 +365,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = valeriy.pokatilo.RSSreader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
