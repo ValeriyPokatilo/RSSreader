@@ -7,13 +7,17 @@
 
 import UIKit
 
-class RSSViewController: UIViewController {
-
+final class RSSViewController: UIViewController {
+    
+    // MARK: - lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.purple
+
     }
-
-
+    
+    override func loadView() {
+        self.view = RSSView()
+    }
 }
 
