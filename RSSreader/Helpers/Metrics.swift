@@ -8,7 +8,7 @@
 import UIKit
 
 struct Metrics {
-    static let verticalOffset: CGFloat = 14
+    static let verticalOffset: CGFloat = 8
     static let horizontalOffset: CGFloat = 20
     static let cellHeight: CGFloat = 120
     static let cellImageWidth: CGFloat = 110
