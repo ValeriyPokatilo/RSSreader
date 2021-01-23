@@ -24,12 +24,14 @@ final class RSSView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        let url = URL(string: "https://habr.com/ru/rss/hubs/all/")!
-        self.presenter.loadRss(url)
-
         self.setupView()
         self.setupViewLayout()
         
+        if let text = self.urlTextField.text {
+            if let url = URL(string: text) {
+                self.presenter.loadRss(url)
+            }
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -41,6 +43,13 @@ final class RSSView: UIView {
 private extension RSSView {
     func setupView() {
         self.backgroundColor = UIColor.systemBackground
+        
+        self.urlTextField.delegate = self
+        self.urlTextField.text = "https://lenta.ru/rss/articles"
+        self.urlTextField.borderStyle = UITextField.BorderStyle.roundedRect
+        self.urlTextField.font = Fonts.headerStyle.font
+        self.urlTextField.clearButtonMode =  UITextField.ViewMode.always
+        self.urlTextField.returnKeyType = UIReturnKeyType.done
                 
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -55,6 +64,21 @@ private extension RSSView {
     }
     
     func setupViewLayout() {
+        self.addSubview(self.urlTextField)
+        self.urlTextField.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            self.urlTextField.leadingAnchor.constraint(
+                equalTo: self.safeAreaLayoutGuide.leadingAnchor,
+                constant: Metrics.horizontalOffset),
+            self.urlTextField.trailingAnchor.constraint(
+                equalTo: self.safeAreaLayoutGuide.trailingAnchor,
+                constant: -Metrics.horizontalOffset),
+            self.urlTextField.topAnchor.constraint(
+                equalTo: self.safeAreaLayoutGuide.topAnchor,
+                constant: Metrics.horizontalOffset)
+        ])
+        
         self.addSubview(self.tableView)
         self.tableView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -64,7 +88,8 @@ private extension RSSView {
             self.tableView.trailingAnchor.constraint(
                 equalTo: self.safeAreaLayoutGuide.trailingAnchor),
             self.tableView.topAnchor.constraint(
-                equalTo: self.safeAreaLayoutGuide.topAnchor)
+                equalTo: self.urlTextField.bottomAnchor,
+                constant: Metrics.verticalOffset)
         ])
         
         self.addSubview(self.filters)
@@ -117,6 +142,28 @@ extension RSSView: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return Metrics.cellHeight
+    }
+}
+
+// MARK: - UITextFieldDelegate
+
+extension RSSView: UITextFieldDelegate {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        self.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.urlTextField.resignFirstResponder()
+        
+        if let text = self.urlTextField.text {
+            if let url = URL(string: text) {
+                self.presenter.loadRss(url)
+                self.tableView.reloadData()
+            }
+        }
+        
+        return true
     }
 }
 
