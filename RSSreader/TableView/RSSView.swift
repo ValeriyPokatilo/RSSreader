@@ -13,6 +13,7 @@ final class RSSView: UIView {
     
     private let cellID = "Cell"
     private var tableView = UITableView()
+    private var urlTextField = UITextField()
     
     private var filters = UISegmentedControl()
     
@@ -22,6 +23,9 @@ final class RSSView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        let url = URL(string: "https://habr.com/ru/rss/hubs/all/")!
+        self.presenter.loadRss(url)
 
         self.setupView()
         self.setupViewLayout()
@@ -37,7 +41,7 @@ final class RSSView: UIView {
 private extension RSSView {
     func setupView() {
         self.backgroundColor = UIColor.systemBackground
-        
+                
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.register(RSSCell.self, forCellReuseIdentifier: cellID)
@@ -79,7 +83,6 @@ private extension RSSView {
                 equalTo: self.safeAreaLayoutGuide.bottomAnchor,
                 constant: -Metrics.verticalOffset)
         ])
-        
     }
 }
 
@@ -87,14 +90,17 @@ private extension RSSView {
 
 extension RSSView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.rssArray.count
+        return self.presenter.headers.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: cellID,
                                                       for: indexPath) as? RSSCell
         
-        cell?.configure()
+        let header = self.presenter.getHeader(index: indexPath.row)
+        let image = self.presenter.getImage(index: indexPath.row)
+        
+        cell?.configure(with: header, and: image)
         
         guard let nonOptionalCell = cell else { return UITableViewCell() }
         

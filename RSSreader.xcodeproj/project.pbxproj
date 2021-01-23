@@ -20,6 +20,8 @@
 		970A9C1F25BB4844007F48C8 /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970A9C1E25BB4844007F48C8 /* Text.swift */; };
 		970A9C2625BB50A0007F48C8 /* RSSViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970A9C2525BB50A0007F48C8 /* RSSViewPresenter.swift */; };
 		970A9C2A25BB5335007F48C8 /* RSSViewPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970A9C2925BB5335007F48C8 /* RSSViewPresenterProtocol.swift */; };
+		970A9C3025BB56A6007F48C8 /* RSSParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970A9C2F25BB56A6007F48C8 /* RSSParser.swift */; };
+		970A9C3D25BC8A6B007F48C8 /* ImageExtractor .swift in Sources */ = {isa = PBXBuildFile; fileRef = 970A9C3C25BC8A6B007F48C8 /* ImageExtractor .swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +40,8 @@
 		970A9C1E25BB4844007F48C8 /* Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Text.swift; sourceTree = "<group>"; };
 		970A9C2525BB50A0007F48C8 /* RSSViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSViewPresenter.swift; sourceTree = "<group>"; };
 		970A9C2925BB5335007F48C8 /* RSSViewPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSViewPresenterProtocol.swift; sourceTree = "<group>"; };
+		970A9C2F25BB56A6007F48C8 /* RSSParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSParser.swift; sourceTree = "<group>"; };
+		970A9C3C25BC8A6B007F48C8 /* ImageExtractor .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageExtractor .swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +76,7 @@
 			children = (
 				970A9C2225BB5062007F48C8 /* TableView */,
 				970A9C2325BB506E007F48C8 /* TableViewCell */,
+				970A9C2E25BB5690007F48C8 /* Parser */,
 				970A9C1025BB4579007F48C8 /* Helpers */,
 				970A9C0925BB42BD007F48C8 /* Application */,
 			);
@@ -97,6 +102,7 @@
 				970A9C1425BB45B4007F48C8 /* Fonts.swift */,
 				970A9C1725BB45DD007F48C8 /* AssetImages.swift */,
 				970A9C1E25BB4844007F48C8 /* Text.swift */,
+				970A9C3C25BC8A6B007F48C8 /* ImageExtractor .swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -118,6 +124,14 @@
 				970A9C1A25BB46CA007F48C8 /* RSSCell.swift */,
 			);
 			path = TableViewCell;
+			sourceTree = "<group>";
+		};
+		970A9C2E25BB5690007F48C8 /* Parser */ = {
+			isa = PBXGroup;
+			children = (
+				970A9C2F25BB56A6007F48C8 /* RSSParser.swift */,
+			);
+			path = Parser;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -196,8 +210,10 @@
 				970A9C1225BB4594007F48C8 /* Metrics.swift in Sources */,
 				970A9C1F25BB4844007F48C8 /* Text.swift in Sources */,
 				970A9BF325BB3E94007F48C8 /* AppDelegate.swift in Sources */,
+				970A9C3025BB56A6007F48C8 /* RSSParser.swift in Sources */,
 				970A9C1825BB45DD007F48C8 /* AssetImages.swift in Sources */,
 				970A9C1525BB45B4007F48C8 /* Fonts.swift in Sources */,
+				970A9C3D25BC8A6B007F48C8 /* ImageExtractor .swift in Sources */,
 				970A9BF525BB3E94007F48C8 /* SceneDelegate.swift in Sources */,
 				970A9C2A25BB5335007F48C8 /* RSSViewPresenterProtocol.swift in Sources */,
 			);

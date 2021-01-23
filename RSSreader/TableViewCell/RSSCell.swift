@@ -16,8 +16,8 @@ final class RSSCell: UITableViewCell {
     
     // MARK: - Lifecycle
     
-    func configure() {
-        self.setupView()
+    func configure(with header: String, and image: UIImage) {
+        self.setupView(header, image)
         self.setupViewLayout()
     }
 }
@@ -25,15 +25,15 @@ final class RSSCell: UITableViewCell {
 // MARK: - Setup layout
 
 private extension RSSCell {
-    func setupView() {
-        self.headerLabel.text = Text.text
+    func setupView(_ header: String, _ image: UIImage) {
+        self.headerLabel.text = header
         self.headerLabel.font = Fonts.headerStyle.font
         self.headerLabel.textColor = UIColor.darkGray
         self.headerLabel.numberOfLines = 6
         self.headerLabel.textAlignment = NSTextAlignment.justified
 
-        self.headerImage.image = AssetImages.nophoto.image
-        self.headerImage.contentMode = UIView.ContentMode.scaleAspectFill
+        self.headerImage.image = image
+        self.headerImage.contentMode = UIView.ContentMode.scaleAspectFit
     }
     
     func setupViewLayout() {

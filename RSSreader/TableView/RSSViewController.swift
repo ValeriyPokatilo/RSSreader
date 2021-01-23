@@ -20,4 +20,3 @@ final class RSSViewController: UIViewController {
         self.view = RSSView()
     }
 }
-
