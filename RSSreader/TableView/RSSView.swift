@@ -18,6 +18,8 @@ final class RSSView: UIView {
     private var filters = UISegmentedControl()
     private var currenFiler = Filters.none
     
+    private var activityIndicator = UIActivityIndicatorView()
+    
     var presenter: RSSViewPresenterProtocol = RSSViewPresenter()
     
     // MARK: - lifecycle
@@ -28,9 +30,24 @@ final class RSSView: UIView {
         self.setupView()
         self.setupViewLayout()
         
+        self.startParsing()
+    }
+    
+    private func startParsing() {
+        self.activityIndicator.startAnimating()
+        
         if let text = self.urlTextField.text {
-            if let url = URL(string: text) {
-                self.presenter.loadRss(url)
+            let queue = DispatchQueue.global(qos: .utility)
+            queue.async {
+                // parsing
+                if let url = URL(string: text) {
+                    self.presenter.loadRss(url)
+                }
+                DispatchQueue.main.async {
+                    // comeback
+                    self.tableView.reloadData()
+                    self.activityIndicator.stopAnimating()
+                }
             }
         }
     }
@@ -60,8 +77,10 @@ private extension RSSView {
         self.filters.insertSegment(withTitle: "Ч/Б", at: 1, animated: false)
         self.filters.insertSegment(withTitle: "Сепия", at: 2, animated: false)
         self.filters.selectedSegmentIndex = 0
-        
         self.filters.addTarget(self, action: #selector(changeFilters), for: .valueChanged)
+        
+        self.activityIndicator.hidesWhenStopped = true
+
     }
     
     func setupViewLayout() {
@@ -109,6 +128,16 @@ private extension RSSView {
                 equalTo: self.safeAreaLayoutGuide.bottomAnchor,
                 constant: -Metrics.verticalOffset)
         ])
+        
+        self.addSubview(self.activityIndicator)
+        self.activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            self.activityIndicator.centerXAnchor.constraint(
+                equalTo: self.centerXAnchor),
+            self.activityIndicator.centerYAnchor.constraint(
+                equalTo: self.centerYAnchor)
+        ])
+
     }
 }
 
@@ -157,13 +186,8 @@ extension RSSView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.urlTextField.resignFirstResponder()
         
-        if let text = self.urlTextField.text {
-            if let url = URL(string: text) {
-                self.presenter.loadRss(url)
-                self.tableView.reloadData()
-            }
-        }
-        
+        self.startParsing()
+
         return true
     }
 }
@@ -172,7 +196,7 @@ extension RSSView: UITextFieldDelegate {
 
 private extension RSSView {
     @objc func changeFilters() {
-        for index in 0..<self.presenter.currentImages.count {
+        for _ in 0..<self.presenter.currentImages.count {
             switch filters.selectedSegmentIndex {
             case 0:
                 self.currenFiler = Filters.none

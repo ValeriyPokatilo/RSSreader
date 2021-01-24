@@ -8,7 +8,7 @@
 import UIKit
 
 final class RSSViewPresenter: RSSViewPresenterProtocol {
-    
+
     // MARK: - Properties
 
     var headers: NSArray = []
@@ -21,19 +21,20 @@ final class RSSViewPresenter: RSSViewPresenterProtocol {
         currentImages = []
         
         let myParser : XmlParserManager = XmlParserManager().initWithURL(data) as! XmlParserManager
-
-        headers = myParser.headersArray
-        imagesUrl = myParser.imagesArray
+        
+        self.headers = myParser.headersArray
+        self.imagesUrl = myParser.imagesArray
         
         for item in imagesUrl {
-            print("-=# \(item as! String)")
             let url = NSURL(string: item as! String)
             let data = NSData(contentsOf:url! as URL)
-            let image = UIImage(data:data! as Data)
-            
-            if let image = image {
-                originalImages.append(image)
-                currentImages.append(image)
+            if let data = data {
+                let image = UIImage(data:data as Data)
+                
+                if let image = image {
+                    originalImages.append(image)
+                    currentImages.append(image)
+                }
             }
         }
     }
@@ -43,13 +44,17 @@ final class RSSViewPresenter: RSSViewPresenterProtocol {
     }
     
     func getImage(index: Int, filter: Filters) -> UIImage {
-        switch filter {
-        case .none :
-            return originalImages[index]
-        case .CIPhotoEffectTonal:
-            return FiltersManager.shared.applyFilter(image: currentImages[index], filterName: "CIPhotoEffectTonal")
-        case .CISepiaTone:
-            return FiltersManager.shared.applyFilter(image: currentImages[index], filterName: "CISepiaTone")
+        if !originalImages.isEmpty {
+            switch filter {
+            case .none :
+                return originalImages[index]
+            case .CIPhotoEffectTonal:
+                return FiltersManager.shared.applyFilter(image: currentImages[index], filterName: "CIPhotoEffectTonal")
+            case .CISepiaTone:
+                return FiltersManager.shared.applyFilter(image: currentImages[index], filterName: "CISepiaTone")
+            }
+        } else {
+            return AssetImages.nophoto.image
         }
     }
 }
