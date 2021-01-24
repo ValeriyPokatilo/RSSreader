@@ -175,7 +175,7 @@ private extension RSSView {
         for index in 0..<self.presenter.currentImages.count {
             switch filters.selectedSegmentIndex {
             case 0:
-                self.presenter.currentImages[index] = self.presenter.originalImages[index]
+                self.currenFiler = Filters.none
                 self.tableView.reloadData()
             case 1:
                 self.currenFiler = Filters.CIPhotoEffectTonal

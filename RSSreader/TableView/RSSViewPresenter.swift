@@ -17,12 +17,16 @@ final class RSSViewPresenter: RSSViewPresenterProtocol {
     var currentImages: [UIImage] = []
         
     func loadRss(_ data: URL) {
+        originalImages = []
+        currentImages = []
+        
         let myParser : XmlParserManager = XmlParserManager().initWithURL(data) as! XmlParserManager
 
         headers = myParser.headersArray
         imagesUrl = myParser.imagesArray
         
         for item in imagesUrl {
+            print("-=# \(item as! String)")
             let url = NSURL(string: item as! String)
             let data = NSData(contentsOf:url! as URL)
             let image = UIImage(data:data! as Data)
