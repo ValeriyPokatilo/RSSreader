@@ -12,33 +12,44 @@ final class RSSViewPresenter: RSSViewPresenterProtocol {
     // MARK: - Properties
 
     var headers: NSArray = []
-    var images: [AnyObject] = []
+    var imagesUrl: [AnyObject] = []
+    var originalImages: [UIImage] = []
+    var currentImages: [UIImage] = []
         
     func loadRss(_ data: URL) {
-        // XmlParserManager instance/object/variable.
+        originalImages = []
+        currentImages = []
+        
         let myParser : XmlParserManager = XmlParserManager().initWithURL(data) as! XmlParserManager
 
-        // Put feed in array.
         headers = myParser.headersArray
-        images = myParser.imagesArray
+        imagesUrl = myParser.imagesArray
         
-        print("-=### H \(headers.count)")
-        print("-=### I \(images.count)")
+        for item in imagesUrl {
+            print("-=# \(item as! String)")
+            let url = NSURL(string: item as! String)
+            let data = NSData(contentsOf:url! as URL)
+            let image = UIImage(data:data! as Data)
+            
+            if let image = image {
+                originalImages.append(image)
+                currentImages.append(image)
+            }
+        }
     }
     
     func getHeader(index: Int) -> String {
         return (self.headers.object(at: index) as AnyObject).object(forKey: "title") as? String ?? ""
     }
     
-    func getImage(index: Int) -> UIImage {
-        if  !images.isEmpty {
-            let url = NSURL(string: self.images[index] as! String)
-            let data = NSData(contentsOf:url! as URL)
-            let image = UIImage(data:data! as Data)
-            
-            return image!
-        } else {
-            return UIImage()
+    func getImage(index: Int, filter: Filters) -> UIImage {
+        switch filter {
+        case .none :
+            return originalImages[index]
+        case .CIPhotoEffectTonal:
+            return FiltersManager.shared.applyFilter(image: currentImages[index], filterName: "CIPhotoEffectTonal")
+        case .CISepiaTone:
+            return FiltersManager.shared.applyFilter(image: currentImages[index], filterName: "CISepiaTone")
         }
     }
 }

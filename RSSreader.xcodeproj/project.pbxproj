@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9709913925BD4E5800CF08FF /* FiltersManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9709913825BD4E5800CF08FF /* FiltersManager.swift */; };
+		9709913C25BD4E6F00CF08FF /* Filters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9709913B25BD4E6F00CF08FF /* Filters.swift */; };
+		9709913F25BD623200CF08FF /* Description.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 9709913E25BD623200CF08FF /* Description.rtf */; };
 		970A9BF325BB3E94007F48C8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970A9BF225BB3E94007F48C8 /* AppDelegate.swift */; };
 		970A9BF525BB3E94007F48C8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970A9BF425BB3E94007F48C8 /* SceneDelegate.swift */; };
 		970A9BF725BB3E94007F48C8 /* RSSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970A9BF625BB3E94007F48C8 /* RSSViewController.swift */; };
@@ -22,9 +25,13 @@
 		970A9C2A25BB5335007F48C8 /* RSSViewPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970A9C2925BB5335007F48C8 /* RSSViewPresenterProtocol.swift */; };
 		970A9C3025BB56A6007F48C8 /* RSSParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970A9C2F25BB56A6007F48C8 /* RSSParser.swift */; };
 		970A9C3D25BC8A6B007F48C8 /* ImageExtractor .swift in Sources */ = {isa = PBXBuildFile; fileRef = 970A9C3C25BC8A6B007F48C8 /* ImageExtractor .swift */; };
+		970A9C4125BCAC0D007F48C8 /* RSSItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 970A9C4025BCAC0D007F48C8 /* RSSItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9709913825BD4E5800CF08FF /* FiltersManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersManager.swift; sourceTree = "<group>"; };
+		9709913B25BD4E6F00CF08FF /* Filters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filters.swift; sourceTree = "<group>"; };
+		9709913E25BD623200CF08FF /* Description.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Description.rtf; sourceTree = "<group>"; };
 		970A9BEF25BB3E94007F48C8 /* RSSreader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RSSreader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		970A9BF225BB3E94007F48C8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		970A9BF425BB3E94007F48C8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -42,6 +49,7 @@
 		970A9C2925BB5335007F48C8 /* RSSViewPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSViewPresenterProtocol.swift; sourceTree = "<group>"; };
 		970A9C2F25BB56A6007F48C8 /* RSSParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSParser.swift; sourceTree = "<group>"; };
 		970A9C3C25BC8A6B007F48C8 /* ImageExtractor .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageExtractor .swift"; sourceTree = "<group>"; };
+		970A9C4025BCAC0D007F48C8 /* RSSItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +82,7 @@
 		970A9BF125BB3E94007F48C8 /* RSSreader */ = {
 			isa = PBXGroup;
 			children = (
+				9709913E25BD623200CF08FF /* Description.rtf */,
 				970A9C2225BB5062007F48C8 /* TableView */,
 				970A9C2325BB506E007F48C8 /* TableViewCell */,
 				970A9C2E25BB5690007F48C8 /* Parser */,
@@ -103,6 +112,8 @@
 				970A9C1725BB45DD007F48C8 /* AssetImages.swift */,
 				970A9C1E25BB4844007F48C8 /* Text.swift */,
 				970A9C3C25BC8A6B007F48C8 /* ImageExtractor .swift */,
+				9709913825BD4E5800CF08FF /* FiltersManager.swift */,
+				9709913B25BD4E6F00CF08FF /* Filters.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -130,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				970A9C2F25BB56A6007F48C8 /* RSSParser.swift */,
+				970A9C4025BCAC0D007F48C8 /* RSSItem.swift */,
 			);
 			path = Parser;
 			sourceTree = "<group>";
@@ -192,6 +204,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				970A9BFF25BB3E9A007F48C8 /* LaunchScreen.storyboard in Resources */,
+				9709913F25BD623200CF08FF /* Description.rtf in Resources */,
 				970A9BFC25BB3E9A007F48C8 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -204,10 +217,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				970A9C2625BB50A0007F48C8 /* RSSViewPresenter.swift in Sources */,
+				9709913C25BD4E6F00CF08FF /* Filters.swift in Sources */,
 				970A9C1B25BB46CA007F48C8 /* RSSCell.swift in Sources */,
 				970A9BF725BB3E94007F48C8 /* RSSViewController.swift in Sources */,
+				970A9C4125BCAC0D007F48C8 /* RSSItem.swift in Sources */,
 				970A9C0E25BB44CD007F48C8 /* RSSView.swift in Sources */,
 				970A9C1225BB4594007F48C8 /* Metrics.swift in Sources */,
+				9709913925BD4E5800CF08FF /* FiltersManager.swift in Sources */,
 				970A9C1F25BB4844007F48C8 /* Text.swift in Sources */,
 				970A9BF325BB3E94007F48C8 /* AppDelegate.swift in Sources */,
 				970A9C3025BB56A6007F48C8 /* RSSParser.swift in Sources */,

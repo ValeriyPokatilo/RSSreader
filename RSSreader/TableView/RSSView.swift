@@ -16,6 +16,7 @@ final class RSSView: UIView {
     private var urlTextField = UITextField()
     
     private var filters = UISegmentedControl()
+    private var currenFiler = Filters.none
     
     var presenter: RSSViewPresenterProtocol = RSSViewPresenter()
     
@@ -123,8 +124,8 @@ extension RSSView: UITableViewDataSource {
                                                       for: indexPath) as? RSSCell
         
         let header = self.presenter.getHeader(index: indexPath.row)
-        let image = self.presenter.getImage(index: indexPath.row)
-        
+        let image = self.presenter.getImage(index: indexPath.row, filter: currenFiler)
+
         cell?.configure(with: header, and: image)
         
         guard let nonOptionalCell = cell else { return UITableViewCell() }
@@ -171,6 +172,20 @@ extension RSSView: UITextFieldDelegate {
 
 private extension RSSView {
     @objc func changeFilters() {
-        // Filtering
+        for index in 0..<self.presenter.currentImages.count {
+            switch filters.selectedSegmentIndex {
+            case 0:
+                self.currenFiler = Filters.none
+                self.tableView.reloadData()
+            case 1:
+                self.currenFiler = Filters.CIPhotoEffectTonal
+                self.tableView.reloadData()
+            case 2:
+                self.currenFiler = Filters.CISepiaTone
+                self.tableView.reloadData()
+            default:
+                break
+            }
+        }
     }
 }
