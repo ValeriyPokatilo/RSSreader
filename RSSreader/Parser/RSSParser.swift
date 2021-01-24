@@ -5,7 +5,7 @@
 //  Created by Valeriy Pokatilo on 23.01.2021.
 //
 
-import Foundation
+import UIKit
 
 class XmlParserManager: NSObject, XMLParserDelegate {
     
@@ -37,12 +37,15 @@ class XmlParserManager: NSObject, XMLParserDelegate {
     
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
         element = elementName as NSString
-        if (element as NSString).isEqual(to: "item") {
+        
+        if element == "item" {
             elements =  NSMutableDictionary()
             elements = [:]
             ftitle = NSMutableString()
             ftitle = ""
-        } else if (element as NSString).isEqual(to: "enclosure") {
+        }
+        
+        if element == "enclosure" {
             if let urlString = attributeDict["url"] {
                 imagesArray.append(urlString as AnyObject)
             }
