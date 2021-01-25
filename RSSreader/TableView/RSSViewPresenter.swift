@@ -11,50 +11,29 @@ final class RSSViewPresenter: RSSViewPresenterProtocol {
 
     // MARK: - Properties
 
-    var headers: NSArray = []
-    var imagesUrl: [AnyObject] = []
-    var originalImages: [UIImage] = []
-    var currentImages: [UIImage] = []
+    var rssItemsArrayExport: [RSSItem] = []
+    var currentFilter = Filters.none 
         
+    // Methods
+    
     func loadRss(_ data: URL) {
-        originalImages = []
-        currentImages = []
-        
+        self.rssItemsArrayExport = []
         let myParser : XmlParserManager = XmlParserManager().initWithURL(data) as! XmlParserManager
-        
-        self.headers = myParser.headersArray
-        self.imagesUrl = myParser.imagesArray
-        
-        for item in imagesUrl {
-            let url = NSURL(string: item as! String)
-            let data = NSData(contentsOf:url! as URL)
-            if let data = data {
-                let image = UIImage(data:data as Data)
-                
-                if let image = image {
-                    originalImages.append(image)
-                    currentImages.append(image)
-                }
-            }
-        }
+        self.rssItemsArrayExport = myParser.rssItemsArray
     }
     
-    func getHeader(index: Int) -> String {
-        return (self.headers.object(at: index) as AnyObject).object(forKey: "title") as? String ?? ""
-    }
-    
-    func getImage(index: Int, filter: Filters) -> UIImage {
-        if !originalImages.isEmpty {
-            switch filter {
-            case .none :
-                return originalImages[index]
-            case .CIPhotoEffectTonal:
-                return FiltersManager.shared.applyFilter(image: currentImages[index], filterName: "CIPhotoEffectTonal")
-            case .CISepiaTone:
-                return FiltersManager.shared.applyFilter(image: currentImages[index], filterName: "CISepiaTone")
-            }
-        } else {
-            return AssetImages.nophoto.image
+    func getElement(index: Int) -> RSSItem {
+        switch currentFilter {
+        case .none:
+            rssItemsArrayExport[index].filteredImage = rssItemsArrayExport[index].originalImage
+        case .CIPhotoEffectTonal:
+            rssItemsArrayExport[index].filteredImage = FiltersManager.shared.applyFilter(image: rssItemsArrayExport[index].originalImage!,
+                                                                                         filterName: "CIPhotoEffectTonal")
+        case .CISepiaTone:
+            rssItemsArrayExport[index].filteredImage = FiltersManager.shared.applyFilter(image: rssItemsArrayExport[index].originalImage!,
+                                                                                         filterName: "CISepiaTone")
         }
+        
+        return rssItemsArrayExport[index]
     }
 }
