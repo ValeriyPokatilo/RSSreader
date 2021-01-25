@@ -13,4 +13,6 @@ struct Metrics {
     static let cellHeight: CGFloat = 120
     static let cellImageWidth: CGFloat = 110
     static let cellOffset: CGFloat = 8
+    
+    static let paginationValue: Int = 7
 }

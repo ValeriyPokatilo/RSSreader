@@ -15,15 +15,15 @@ final class RSSViewPresenter: RSSViewPresenterProtocol {
     var rssItemsArrayExport: [RSSItem] = []
     var currentFilter: Filters = Filters.none
     
-    var startPosition: Int = -4
+    var startPosition: Int = 1 - Metrics.paginationValue
     var endPosition: Int = 0
         
     // Methods
     
     func loadRss(_ data: URL) {
         self.rssItemsArray = []
-        self.startPosition += 5
-        self.endPosition += 5
+        self.startPosition += Metrics.paginationValue
+        self.endPosition += Metrics.paginationValue
         
         let myParser : XmlParserManager = XmlParserManager().initWithURL(data,
                                                                          startPosition: startPosition,
