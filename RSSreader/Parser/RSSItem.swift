@@ -9,6 +9,6 @@ import UIKit
 
 struct RSSItem {
     var header: String
-    var originalImage: UIImage
-    var filteredImage: UIImage
+    var originalImage: UIImage?
+    var filteredImage: UIImage?
 }

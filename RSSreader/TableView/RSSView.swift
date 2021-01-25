@@ -16,7 +16,6 @@ final class RSSView: UIView {
     private var urlTextField = UITextField()
     
     private var filters = UISegmentedControl()
-    private var currenFiler = Filters.none
     
     private var activityIndicator = UIActivityIndicatorView()
     
@@ -31,25 +30,6 @@ final class RSSView: UIView {
         self.setupViewLayout()
         
         self.startParsing()
-    }
-    
-    private func startParsing() {
-        self.activityIndicator.startAnimating()
-        
-        if let text = self.urlTextField.text {
-            let queue = DispatchQueue.global(qos: .utility)
-            queue.async {
-                // parsing
-                if let url = URL(string: text) {
-                    self.presenter.loadRss(url)
-                }
-                DispatchQueue.main.async {
-                    // comeback
-                    self.tableView.reloadData()
-                    self.activityIndicator.stopAnimating()
-                }
-            }
-        }
     }
     
     required init?(coder: NSCoder) {
@@ -145,17 +125,20 @@ private extension RSSView {
 
 extension RSSView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.presenter.headers.count
+        return self.presenter.rssItemsArrayExport.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: cellID,
                                                       for: indexPath) as? RSSCell
         
-        let header = self.presenter.getHeader(index: indexPath.row)
-        let image = self.presenter.getImage(index: indexPath.row, filter: currenFiler)
+        let item = self.presenter.getElement(index: indexPath.row)
 
-        cell?.configure(with: header, and: image)
+        if let sendImage = item.filteredImage {
+            cell?.configure(with: item.header, and: sendImage)
+        } else {
+            cell?.configure(with: item.header, and: AssetImages.nophoto.image)
+        }
         
         guard let nonOptionalCell = cell else { return UITableViewCell() }
         
@@ -192,23 +175,46 @@ extension RSSView: UITextFieldDelegate {
     }
 }
 
-// MARK: - Filters
+// MARK: - Methods
 
 private extension RSSView {
     @objc func changeFilters() {
-        for _ in 0..<self.presenter.currentImages.count {
-            switch filters.selectedSegmentIndex {
-            case 0:
-                self.currenFiler = Filters.none
-                self.tableView.reloadData()
-            case 1:
-                self.currenFiler = Filters.CIPhotoEffectTonal
-                self.tableView.reloadData()
-            case 2:
-                self.currenFiler = Filters.CISepiaTone
-                self.tableView.reloadData()
-            default:
-                break
+        switch filters.selectedSegmentIndex {
+        case 0:
+            self.presenter.currentFilter = Filters.none
+            self.tableView.reloadData()
+        case 1:
+            self.presenter.currentFilter = Filters.CIPhotoEffectTonal
+            self.tableView.reloadData()
+        case 2:
+            self.presenter.currentFilter = Filters.CISepiaTone
+            self.tableView.reloadData()
+        default:
+            break
+        }
+    }
+
+    func startParsing() {
+        self.activityIndicator.startAnimating()
+        self.filters.isEnabled = false
+        self.urlTextField.isEnabled = false
+        self.tableView.isScrollEnabled = false
+
+        if let text = self.urlTextField.text {
+            let queue = DispatchQueue.global(qos: .utility)
+            queue.async {
+                // parsing
+                if let url = URL(string: text) {
+                    self.presenter.loadRss(url)
+                }
+                DispatchQueue.main.async {
+                    // comeback
+                    self.tableView.reloadData()
+                    self.activityIndicator.stopAnimating()
+                    self.filters.isEnabled = true
+                    self.urlTextField.isEnabled = true
+                    self.tableView.isScrollEnabled = true
+                }
             }
         }
     }

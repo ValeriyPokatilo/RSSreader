@@ -12,18 +12,11 @@ final class ImageExtractor {
     static let shared = ImageExtractor()
     
     func extractImageFromURL(urlString: String) -> UIImage {
-        var image = UIImage()
-        
         let imageURL: URL = URL(string: urlString)!
-        let queue = DispatchQueue.global(qos: .utility)
-        queue.async{
-            if let data = try? Data(contentsOf: imageURL){
-                DispatchQueue.main.async {
-                    image = UIImage(data: data)!
-                }
-            }
+        if let data = try? Data(contentsOf: imageURL) {
+            return UIImage(data: data)!
+        } else {
+            return AssetImages.nophoto.image
         }
-        
-        return image
     }
 }

@@ -8,12 +8,9 @@
 import UIKit
 
 protocol RSSViewPresenterProtocol {
-    var headers: NSArray { get set }
-    var imagesUrl: [AnyObject] { get set }
-    var originalImages: [UIImage] { get set }
-    var currentImages: [UIImage] { get set }
+    var rssItemsArrayExport: [RSSItem] { get }
+    var currentFilter: Filters { get set }
 
     func loadRss(_ data: URL)
-    func getHeader(index: Int) -> String
-    func getImage(index: Int, filter: Filters) -> UIImage
+    func getElement(index: Int) -> RSSItem
 }
