@@ -11,6 +11,8 @@ final class RSSView: UIView {
     
     // MARK: - Properties
     
+    private var fetchingMore = false
+    
     private let cellID = "Cell"
     private var tableView = UITableView()
     private var urlTextField = UITextField()
@@ -36,6 +38,16 @@ final class RSSView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        
+        if offsetY > contentHeight - scrollView.frame.height {
+            if !fetchingMore {
+                beginButchFetch()
+            }
+        }
+    }
 }
 
 private extension RSSView {
@@ -169,6 +181,7 @@ extension RSSView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.urlTextField.resignFirstResponder()
         
+        self.presenter = RSSViewPresenter()
         self.startParsing()
 
         return true
@@ -182,17 +195,16 @@ private extension RSSView {
         switch filters.selectedSegmentIndex {
         case 0:
             self.presenter.currentFilter = Filters.none
-            self.tableView.reloadData()
         case 1:
             self.presenter.currentFilter = Filters.CIPhotoEffectTonal
-            self.tableView.reloadData()
         case 2:
             self.presenter.currentFilter = Filters.CISepiaTone
-            self.tableView.reloadData()
         default:
             break
         }
+        self.tableView.reloadData()
     }
+
 
     func startParsing() {
         self.activityIndicator.startAnimating()
@@ -216,6 +228,15 @@ private extension RSSView {
                     self.tableView.isScrollEnabled = true
                 }
             }
+        }
+    }
+    
+    func beginButchFetch() {
+        fetchingMore = true
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.startParsing()
+            self.fetchingMore = false
         }
     }
 }

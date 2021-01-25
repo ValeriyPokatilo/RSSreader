@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Filters: String {
+enum Filters {
     case none
     case CIPhotoEffectTonal
     case CISepiaTone
