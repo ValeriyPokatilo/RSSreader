@@ -7,13 +7,16 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+final class RSSViewController: UIViewController {
+    
+    // MARK: - lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+
     }
-
-
+    
+    override func loadView() {
+        self.view = RSSView()
+    }
 }
-
