@@ -10,17 +10,22 @@ import UIKit
 class XmlParserManager: NSObject, XMLParserDelegate {
     
     var parser = XMLParser()
-        var element = String()
-        var rssItemsArray: [RSSItem] = []
-        var rssItem = RSSItem(header: "", originalImage: nil, filteredImage: nil)
-        var currentFeed = 0
-        var counter = -1
-        var header = ""
+    var element = String()
+    var rssItemsArray: [RSSItem] = []
+    var rssItem = RSSItem(header: "", originalImage: nil, filteredImage: nil)
+    var currentFeed = 0
+    var counter = -1
+    var header = ""
+    var start = 0
+    var end = 0
+    
+    func initWithURL(_ url :URL, startPosition: Int, endPosition: Int) -> AnyObject {
+        self.start = startPosition
+        self.end = endPosition
         
-        func initWithURL(_ url :URL) -> AnyObject {
-            startParse(url)
-            return self
-        }
+        startParse(url)
+        return self
+    }
         
         func startParse(_ url :URL) {
             parser = XMLParser(contentsOf: url)!
@@ -42,22 +47,29 @@ class XmlParserManager: NSObject, XMLParserDelegate {
                 self.rssItem = RSSItem(header: "", originalImage: nil, filteredImage: nil)
                 self.header = ""
                 self.currentFeed += 1
-                self.counter += 1
-                self.rssItemsArray.append(rssItem)
+                
+                if currentFeed >= start && currentFeed <= end {
+                    self.counter += 1
+                    self.rssItemsArray.append(rssItem)
+                }
             }
             
             if elementName == "enclosure" {
                 if let urlString = attributeDict["url"] {
-                    rssItemsArray[counter].header += header
-                    rssItemsArray[counter].originalImage = ImageExtractor.shared.extractImageFromURL(urlString: urlString)
-                    rssItemsArray[counter].filteredImage = rssItemsArray[counter].originalImage
+                    if currentFeed >= start && currentFeed <= end {
+                        rssItemsArray[counter].header += header
+                        rssItemsArray[counter].originalImage = ImageExtractor.shared.extractImageFromURL(urlString: urlString)
+                        rssItemsArray[counter].filteredImage = rssItemsArray[counter].originalImage
+                    }
                 }
             }
         }
         
         func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
             if elementName == "item" {
-                self.rssItemsArray[counter].header = self.header
+                if currentFeed >= start && currentFeed <= end {
+                    self.rssItemsArray[counter].header = self.header
+                }
             }
         }
         
@@ -67,4 +79,3 @@ class XmlParserManager: NSObject, XMLParserDelegate {
             }
         }
     }
-

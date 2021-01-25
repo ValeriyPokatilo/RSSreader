@@ -11,15 +11,26 @@ final class RSSViewPresenter: RSSViewPresenterProtocol {
 
     // MARK: - Properties
 
+    var rssItemsArray: [RSSItem] = []
     var rssItemsArrayExport: [RSSItem] = []
-    var currentFilter = Filters.none 
+    var currentFilter: Filters = Filters.none
+    
+    var startPosition: Int = -4
+    var endPosition: Int = 0
         
     // Methods
     
     func loadRss(_ data: URL) {
-        self.rssItemsArrayExport = []
-        let myParser : XmlParserManager = XmlParserManager().initWithURL(data) as! XmlParserManager
-        self.rssItemsArrayExport = myParser.rssItemsArray
+        self.rssItemsArray = []
+        self.startPosition += 5
+        self.endPosition += 5
+        
+        let myParser : XmlParserManager = XmlParserManager().initWithURL(data,
+                                                                         startPosition: startPosition,
+                                                                         endPosition: endPosition) as! XmlParserManager
+        
+        self.rssItemsArray = myParser.rssItemsArray
+        self.rssItemsArrayExport += rssItemsArray
     }
     
     func getElement(index: Int) -> RSSItem {
@@ -27,11 +38,12 @@ final class RSSViewPresenter: RSSViewPresenterProtocol {
         case .none:
             rssItemsArrayExport[index].filteredImage = rssItemsArrayExport[index].originalImage
         case .CIPhotoEffectTonal:
-            rssItemsArrayExport[index].filteredImage = FiltersManager.shared.applyFilter(image: rssItemsArrayExport[index].originalImage!,
-                                                                                         filterName: "CIPhotoEffectTonal")
+            self.rssItemsArrayExport[index].filteredImage = FiltersManager.shared.applyFilter(image: rssItemsArrayExport[index].originalImage!,
+                                                                                             filterName: "CIPhotoEffectTonal")
         case .CISepiaTone:
-            rssItemsArrayExport[index].filteredImage = FiltersManager.shared.applyFilter(image: rssItemsArrayExport[index].originalImage!,
-                                                                                         filterName: "CISepiaTone")
+            self.rssItemsArrayExport[index].filteredImage = FiltersManager.shared.applyFilter(image: rssItemsArrayExport[index].originalImage!,
+                                                                                             filterName: "CISepiaTone")
+
         }
         
         return rssItemsArrayExport[index]
